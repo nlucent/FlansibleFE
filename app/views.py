@@ -2,6 +2,7 @@ from flask import render_template, request, url_for, redirect, flash
 from app import app
 import simplejson as json
 import requests
+import re
 
 @app.route('/')
 @app.route('/index')
@@ -86,5 +87,10 @@ def submitPlaybook():
 
 @app.route('/status/<taskid>')
 def get_status(taskid):
+	refresh = 10
 	status = requests.get(app.config['PBSTATUS_URL'] + taskid, auth=(app.config['PB_POST_USER'], app.config['PB_POST_PASSWD']))
-	return render_template('status.j2', title="Playbook Results", status=status.text)
+	formatted = re.sub(r"\s+TASK", "<br>TASK", status.text)
+
+	if "RECAP" in formatted:
+		refresh = 1000
+	return render_template('status.j2', title="Playbook Results", status=formatted, refresh=refresh)
