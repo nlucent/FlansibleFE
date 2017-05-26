@@ -79,14 +79,15 @@ def submitPlaybook():
 def get_status(taskid):
 	# Proxy and reformat execution status based on task id
 	refresh = 10
+	title = "Playbook Results"
 	status = requests.get(app.config['PBSTATUS_URL'] + taskid, auth=(app.config['PB_POST_USER'], app.config['PB_POST_PASSWD']))
 	formatted = re.sub(r"\s+TASK", "<br>TASK", status.text)
 
 	# playbook execution finished
-	if "RECAP" in formatted:
+	if "RECAP" in formatted or "ERROR" in formatted:
 		# disable refresh in template
 		refresh = 1000
-	return render_template('status.j2', title="Playbook Results", status=formatted, refresh=refresh)
+	return render_template('status.j2', title=title, status=formatted, refresh=refresh)
 
 
 	

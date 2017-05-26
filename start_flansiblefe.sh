@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 
 screen -dmS FlansibleFE python run.py
