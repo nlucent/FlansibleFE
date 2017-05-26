@@ -1,3 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
-screen -dmS FlansibleFE python run.py
+source $HOME/anaconda/bin/activate py27
+/usr/bin/screen -dmS FlansibleFE python run.py
