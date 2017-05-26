@@ -43,19 +43,23 @@ def submitPlaybook():
 	# Runtime variables
 	try:
 		inventory = request.form['inventory']
-		pbmessage['inventory'] = inventory
 	except:
 		inventory = None
 	try:
 		become = request.form['become']
-		pbmessage['become'] = become
 	except:
 		become = None
 	try:
 		forks = request.form['forks']
-		pbmessage['forks'] = forks
 	except:
 		forks = None
+
+	if inventory:
+		pbmessage['inventory'] = inventory
+	if forks:
+		pbmessage['forks'] = forks
+	if become:
+		pbmessage['become'] = become
 
 	posturl = app.config['PB_POST_URL']
 	postusr = app.config['PB_POST_USER']

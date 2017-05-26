@@ -3,9 +3,9 @@
   {% if refresh < 100 %}
     <meta http-equiv="refresh" content="{{refresh}}">
   {% endif %}
+{% block title %}{title}{% endblock %}
 {% endblock %}
 
-{% block title %}{title}{% endblock %}
 
 {% block content %}
 	{{ status }}
