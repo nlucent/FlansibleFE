@@ -1,2 +1,2 @@
 # FlansibleFE
-Simple front end for Flansible simple rest api
+Simple front end for Flansible (Ansible rest api)
